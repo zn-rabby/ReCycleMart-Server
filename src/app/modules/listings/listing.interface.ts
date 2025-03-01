@@ -3,7 +3,7 @@ export type IListing = {
   description: string;
   price: number;
   condition: 'new' | 'used' | 'refurbished';
-  images: string[];
+  images: string;
   userID: string;
   status: 'available' | 'sold';
 };
