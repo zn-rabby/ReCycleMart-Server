@@ -52,9 +52,23 @@ const updateListing = async (id: string, payload: Partial<IListing>) => {
   return result;
 };
 
+const deleteListing = async (id: string) => {
+  // check deleteListing is exists
+  const listing = await Listing.findById(id);
+
+  if (!listing) {
+    throw new AppError(404, 'Listing not found!');
+  }
+
+  const result = await Listing.findByIdAndDelete(id, { isDeleted: true });
+
+  return result;
+};
+
 export const ListingServices = {
   createListing,
   getAllListing,
   getSingleListing,
   updateListing,
+  deleteListing,
 };

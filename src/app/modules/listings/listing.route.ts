@@ -13,8 +13,12 @@ router.post(
   ListingController.createListing,
 );
 
-router.get('/', ListingController.getAllListing);
-router.get('/:id', ListingController.getSingleListing);
+router.delete('/:id', ListingController.deleteListing);
+
 router.put('/:id', ListingController.updateListing);
+
+router.get('/:id', ListingController.getSingleListing);
+
+router.get('/', ListingController.getAllListing);
 
 export const ListingRoutes = router;
