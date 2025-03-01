@@ -4,6 +4,6 @@ import { listingController } from './listing.controller';
 const router = express.Router();
 
 // create listing
-router.post('/listing', listingController.createListing);
+router.post('/', listingController.createListing);
 
 export const ListingRoutes = router;

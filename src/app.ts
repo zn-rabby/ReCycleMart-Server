@@ -1,6 +1,6 @@
 import express, { Application, Request, Response } from 'express';
 import cors from 'cors';
-import { ListingRoutes } from './app/modules/listings/Listing.route';
+import router from './app/routes';
 
 const app: Application = express();
 
@@ -12,8 +12,7 @@ app.use(cors());
 //   Promise.reject()
 // }
 
-app.use('/api', ListingRoutes);
-
+app.use('/api/v1', router);
 // application routes
 
 app.get('', (req: Request, res: Response) => {
