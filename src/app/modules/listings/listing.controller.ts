@@ -1,25 +1,21 @@
 import { Request, Response } from 'express';
 import { listingServices } from './listing.service';
+import { StatusCodes } from 'http-status-codes';
 
-// create listing
-const createListing = async (req: Request, res: Response) => {
-  try {
-    const payload = req.body;
-    const result = await listingServices.createListing(payload);
+import catchAsync from '../../utils/catchAsync';
+import sendResponse from '../../utils/sendResponse';
 
-    res.json({
-      status: true,
-      message: 'Listing create successfully',
-      data: result,
-    });
-  } catch (error) {
-    res.json({
-      status: false,
-      message: 'Something went wrong',
-      error,
-    });
-  }
-};
+const createListing = catchAsync(async (req: Request, res: Response) => {
+  const payload = req.body;
+  const result = await listingServices.createListing(payload);
+
+  sendResponse(res, {
+    statusCode: StatusCodes.OK,
+    success: true,
+    message: 'Product created successfully',
+    data: result,
+  });
+});
 
 export const listingController = {
   createListing,
