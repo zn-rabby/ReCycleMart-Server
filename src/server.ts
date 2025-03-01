@@ -31,6 +31,6 @@ process.on('unhandledRejection', () => {
 
 // synchornous
 process.on('uncaughtException', () => {
-  console.log(`👿 uncaughtExecption is detected, shutting down...`);
+  console.log(`👿 uncaught Execption is detected, shutting down...`);
   process.exit(1);
 });
