@@ -1,4 +1,4 @@
-export type IListings = {
+export type IListing = {
   title: string;
   description: string;
   price: number;
