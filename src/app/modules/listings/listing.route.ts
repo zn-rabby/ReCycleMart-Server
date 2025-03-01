@@ -14,5 +14,6 @@ router.post(
 );
 
 router.get('/', ListingController.getAllListing);
+router.get('/:id', ListingController.getSingleListing);
 
 export const ListingRoutes = router;

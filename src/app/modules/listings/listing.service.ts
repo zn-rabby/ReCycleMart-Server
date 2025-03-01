@@ -30,7 +30,14 @@ const getAllListing = async (query: Record<string, unknown>) => {
   };
 };
 
+const getSingleListing = async (id: string) => {
+  const res = await Listing.findById(id);
+
+  return res;
+};
+
 export const ListingServices = {
   createListing,
   getAllListing,
+  getSingleListing,
 };

@@ -1,7 +1,5 @@
 import { Request, Response } from 'express';
-
 import { StatusCodes } from 'http-status-codes';
-
 import catchAsync from '../../utils/catchAsync';
 import sendResponse from '../../utils/sendResponse';
 import { ListingServices } from './listing.service';
@@ -30,7 +28,19 @@ const getAllListing = catchAsync(async (req, res) => {
   });
 });
 
+const getSingleListing = catchAsync(async (req, res) => {
+  const result = await ListingServices.getSingleListing(req.params.id);
+
+  sendResponse(res, {
+    success: true,
+    statusCode: 200,
+    message: 'Listing Retrieved Successfully',
+    data: result,
+  });
+});
+
 export const ListingController = {
   createListing,
   getAllListing,
+  getSingleListing,
 };
