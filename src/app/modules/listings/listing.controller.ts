@@ -39,8 +39,23 @@ const getSingleListing = catchAsync(async (req, res) => {
   });
 });
 
+const updateListing = catchAsync(async (req, res) => {
+  const id = req.params.id;
+  const updatedData = req.body;
+
+  const result = await ListingServices.updateListing(id, updatedData);
+
+  sendResponse(res, {
+    statusCode: 200,
+    success: true,
+    message: 'Listing updated successfully',
+    data: result,
+  });
+});
+
 export const ListingController = {
   createListing,
   getAllListing,
   getSingleListing,
+  updateListing,
 };

@@ -15,5 +15,6 @@ router.post(
 
 router.get('/', ListingController.getAllListing);
 router.get('/:id', ListingController.getSingleListing);
+router.put('/:id', ListingController.updateListing);
 
 export const ListingRoutes = router;

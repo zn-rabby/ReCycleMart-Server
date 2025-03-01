@@ -36,8 +36,25 @@ const getSingleListing = async (id: string) => {
   return res;
 };
 
+const updateListing = async (id: string, payload: Partial<IListing>) => {
+  // check blog is exists
+  const product = await Listing.findById({ _id: id });
+
+  if (!product) {
+    throw new AppError(404, 'Listing not found!');
+  }
+
+  const result = await Listing.findByIdAndUpdate(id, payload, {
+    new: true,
+    runValidators: true,
+  });
+
+  return result;
+};
+
 export const ListingServices = {
   createListing,
   getAllListing,
   getSingleListing,
+  updateListing,
 };
