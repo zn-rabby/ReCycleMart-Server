@@ -1,7 +1,8 @@
 import express from 'express';
-import { listingController } from './listing.controller';
+
 import { listingValidation } from './listing.validation';
 import validateRequest from '../../middleware/validateRequest';
+import { ListingController } from './listing.controller';
 
 const router = express.Router();
 
@@ -9,7 +10,9 @@ const router = express.Router();
 router.post(
   '/',
   validateRequest(listingValidation.createListingValidationSchema),
-  listingController.createListing,
+  ListingController.createListing,
 );
+
+router.get('/', ListingController.getAllListing);
 
 export const ListingRoutes = router;
