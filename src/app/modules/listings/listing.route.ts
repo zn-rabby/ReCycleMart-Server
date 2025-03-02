@@ -6,7 +6,6 @@ import { ListingController } from './listing.controller';
 
 const router = express.Router();
 
-// create listing
 router.post(
   '/',
   validateRequest(listingValidation.createListingValidationSchema),
