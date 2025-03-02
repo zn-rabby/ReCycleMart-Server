@@ -32,7 +32,7 @@ const login = async (payload: { email: string; password: string }) => {
 
   const isStatus = user.status; // Assuming isBlocked is boolean
 
-  if (isStatus == 'block') {
+  if (isStatus == 'ban') {
     throw new AppError(403, 'Your account has been blocked.');
   }
 

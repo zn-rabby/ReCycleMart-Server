@@ -7,7 +7,7 @@ const registerUserValidationSchema = z.object({
     phoneNumber: z.string(),
     password: z.string(),
     role: z.enum(['admin', 'user']).default('user'),
-    status: z.enum(['active', 'block']).default('active'),
+    status: z.enum(['ban', 'unban']).default('unban'),
     isBlocked: z.boolean().default(false),
   }),
 });

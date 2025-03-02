@@ -7,7 +7,7 @@ export type IUser = {
   phoneNumber: string;
   password: string;
   role: 'user' | 'admin';
-  status: 'active' | 'block';
+  status: 'ban' | 'unban';
   createdAt?: Date;
   updatedAt?: Date;
 };

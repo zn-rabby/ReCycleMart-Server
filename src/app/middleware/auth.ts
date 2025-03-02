@@ -48,7 +48,7 @@ const auth = (...requiredRoles: IUserRole[]) => {
 
     const status = user.status;
 
-    if (status === 'block') {
+    if (status === 'ban') {
       throw new AppError(403, 'Your account has been blocked!');
     }
 

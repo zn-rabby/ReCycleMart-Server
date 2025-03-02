@@ -37,10 +37,10 @@ const userSchema = new Schema<IUser>(
     status: {
       type: String,
       enum: {
-        values: ['active', 'block'],
+        values: ['ban', 'unban'],
         message: '{VALUE} is not valid, please provide a valid status',
       },
-      default: 'active',
+      default: 'unban',
     },
   },
   {
