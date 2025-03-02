@@ -7,10 +7,6 @@ router.get('/:id', UserController.getSingleUser);
 
 router.put('/:id', UserController.updateUser);
 
-// router.get('/:id', ListingController.getSingleListing);
+router.delete('/:id', UserController.deleteListing);
 
 export const UserRoutes = router;
-
-// GET /users/:id – Retrieve user details.
-// PUT /users/:id – Update user profile.
-// DELETE /users/:id – Delete user account.

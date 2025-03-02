@@ -24,7 +24,21 @@ const updateUser = async (id: string, payload: Partial<IUser>) => {
   return result;
 };
 
+const deleteUser = async (id: string) => {
+  // check deleteListing is exists
+  const user = await User.findById(id);
+
+  if (!user) {
+    throw new AppError(404, 'User not found!');
+  }
+
+  const result = await User.findByIdAndDelete(id, { isDeleted: true });
+
+  return result;
+};
+
 export const UserServices = {
   getSingleUser,
   updateUser,
+  deleteUser,
 };
