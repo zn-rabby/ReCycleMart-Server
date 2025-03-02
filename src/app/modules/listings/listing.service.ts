@@ -11,7 +11,7 @@ const createListing = async (payload: IListing): Promise<IListing> => {
 };
 
 const getAllListing = async (query: Record<string, unknown>) => {
-  const listingQuery = new QueryBuilder(Listing.find(), query)
+  const listingQuery = new QueryBuilder(Listing.find().populate('user'), query)
     .search(ListingSearchableFields)
     .filter()
     .sort()

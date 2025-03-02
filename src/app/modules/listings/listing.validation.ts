@@ -31,11 +31,7 @@ const createListingValidationSchema = z.object({
       })
       .url('Image must be a valid URL'),
 
-    userID: z
-      .string({
-        required_error: 'User ID is required',
-      })
-      .min(1, 'User ID cannot be empty'),
+    userID: z.string().min(1, 'User ID cannot be empty').optional(),
 
     status: z.enum(['available', 'sold']).default('available'),
   }),

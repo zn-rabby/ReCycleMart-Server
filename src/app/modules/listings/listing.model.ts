@@ -12,7 +12,10 @@ const listingSchema = new Schema(
       required: true,
     },
     images: { type: String, required: true },
-    userID: { type: String, required: true },
+    userID: {
+      type: Schema.Types.ObjectId,
+      // ref: 'User',
+    },
     status: { type: String, enum: ['available', 'sold'], default: 'available' },
   },
   { timestamps: true },
