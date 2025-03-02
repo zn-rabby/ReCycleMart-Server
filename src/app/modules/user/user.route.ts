@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.get('/:id', UserController.getSingleUser);
 
-// router.put('/:id', ListingController.updateListing);
+router.put('/:id', UserController.updateUser);
 
 // router.get('/:id', ListingController.getSingleListing);
 
