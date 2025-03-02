@@ -15,6 +15,9 @@ const register = async (payload: IUser) => {
   const result = await User.create(payload);
   return result;
 };
+
+
+
 const login = async (payload: { email: string; password: string }) => {
   const user = await User.findOne({ email: payload?.email }).select(
     '+password',
