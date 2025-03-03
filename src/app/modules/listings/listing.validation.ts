@@ -26,14 +26,31 @@ const createListingValidationSchema = z.object({
     }),
 
     images: z
-      .string({
-        required_error: 'Image URL is required',
+      .array(z.string().url('Each image must be a valid URL'), {
+        required_error: 'At least one image is required',
       })
-      .url('Image must be a valid URL'),
+      .nonempty('At least one image is required'),
+
+    category: z.string({
+      required_error: 'Category is required',
+    }),
+
+    location: z.string({
+      required_error: 'Location is required',
+    }),
+
 
     userID: z.string().min(1, 'User ID cannot be empty').optional(),
 
-    status: z.enum(['available', 'sold']).default('available'),
+    status: z
+      .enum(['available', 'sold', 'pending', 'hidden'])
+      .default('available'),
+
+    views: z.number().optional(),
+
+    negotiable: z.boolean().optional(),
+
+    contactMethod: z.enum(['phone', 'email', 'chat']).optional(),
   }),
 });
 
@@ -42,20 +59,28 @@ const updateListingValidationSchema = z.object({
   body: z.object({
     title: z.string().min(1, 'Listing title cannot be empty').optional(),
 
-    description: z
-      .string()
-      .min(1, 'Listing description cannot be empty')
-      .optional(),
+    description: z.string().min(1, 'Listing description cannot be empty').optional(),
 
     price: z.number().min(0, 'Price cannot be negative').optional(),
 
     condition: z.enum(['new', 'used', 'refurbished']).optional(),
 
-    images: z.string().url('Image must be a valid URL').optional(),
+    images: z.array(z.string().url('Each image must be a valid URL')).optional(),
+
+    category: z.string().optional(),
+
+    location: z.string().optional(),
+
 
     userID: z.string().min(1, 'User ID cannot be empty').optional(),
 
-    status: z.enum(['available', 'sold']).optional(),
+    status: z.enum(['available', 'sold', 'pending', 'hidden']).optional(),
+
+    views: z.number().optional(),
+
+    negotiable: z.boolean().optional(),
+
+    contactMethod: z.enum(['phone', 'email', 'chat']).optional(),
   }),
 });
 

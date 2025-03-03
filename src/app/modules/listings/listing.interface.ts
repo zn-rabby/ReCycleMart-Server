@@ -5,7 +5,13 @@ export type IListing = {
   description: string;
   price: number;
   condition: 'new' | 'used' | 'refurbished';
-  images: string;
-  userID?: Types.ObjectId;
-  status: 'available' | 'sold';
+  images: string[]; 
+  category: string; 
+  location: string; 
+  userID?: Types.ObjectId; 
+  status: 'available' | 'sold' | 'pending' | 'hidden'; 
+  views?: number; 
+  createdAt?: Date;
+  updatedAt?: Date;
+  negotiable?: boolean; 
 };

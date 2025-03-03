@@ -14,9 +14,9 @@ router.post(
   ListingController.createListing,
 );
 
-router.delete('/:id', ListingController.deleteListing);
+router.delete('/:id',auth(USER_ROLE.user), ListingController.deleteListing);
 
-router.put('/:id', ListingController.updateListing);
+router.put('/:id',auth(USER_ROLE.user), ListingController.updateListing);
 
 router.get('/:id', ListingController.getSingleListing);
 

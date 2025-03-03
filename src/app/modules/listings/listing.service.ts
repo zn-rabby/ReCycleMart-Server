@@ -6,8 +6,6 @@ import { IListing } from './listing.interface';
 import { Listing } from './listing.model';
 
 // create listing
- // Make sure you import User, not Listing
-
 const createListing = async (payload: IListing, userEmail: string) => {
   const user = await User.isUserExists(userEmail);  // Use User model to check user existence
 
