@@ -1,17 +1,31 @@
 import QueryBuilder from '../../builder/QueryBuilder';
 import AppError from '../../errors/appError';
+import User from '../user/user.model';
 import { ListingSearchableFields } from './listing.constant';
 import { IListing } from './listing.interface';
 import { Listing } from './listing.model';
 
 // create listing
-const createListing = async (payload: IListing): Promise<IListing> => {
-  const result = await Listing.create(payload);
+ // Make sure you import User, not Listing
+
+const createListing = async (payload: IListing, userEmail: string) => {
+  const user = await User.isUserExists(userEmail);  // Use User model to check user existence
+
+  if (!user) {
+    throw new AppError(404, 'User not found!');
+  }
+
+  const userID = user._id;
+
+  const listingData = { ...payload, userID };
+
+  const result = await Listing.create(listingData);
   return result;
 };
 
+
 const getAllListing = async (query: Record<string, unknown>) => {
-  const listingQuery = new QueryBuilder(Listing.find().populate('user'), query)
+  const listingQuery = new QueryBuilder(Listing.find().populate('userID'), query)
     .search(ListingSearchableFields)
     .filter()
     .sort()

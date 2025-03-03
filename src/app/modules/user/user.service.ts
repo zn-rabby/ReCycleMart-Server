@@ -1,11 +1,12 @@
+import { CLIENT_RENEG_LIMIT } from 'tls';
 import AppError from '../../errors/appError';
 import { IUser } from './user.interface';
 import User from './user.model';
 
 const getSingleUser = async (id: string) => {
-  const res = await User.findById(id);
-
-  return res;
+  const user = await User.findById(id);
+  console.log(id,"id",user)
+  return user;
 };
 
 const updateUser = async (id: string, payload: Partial<IUser>) => {

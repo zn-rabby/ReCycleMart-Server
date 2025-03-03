@@ -2,6 +2,7 @@ import { Model } from 'mongoose';
 import { USER_ROLE } from './user.constant';
 
 export type IUser = {
+  _id:string;
   name: string;
   email: string;
   phoneNumber: string;

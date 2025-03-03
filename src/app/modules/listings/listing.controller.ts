@@ -5,8 +5,9 @@ import sendResponse from '../../utils/sendResponse';
 import { ListingServices } from './listing.service';
 
 const createListing = catchAsync(async (req: Request, res: Response) => {
-  const payload = req.body;
-  const result = await ListingServices.createListing(payload);
+  const userEmail = req?.user?.email;
+
+  const result = await ListingServices.createListing(req.body, userEmail);
 
   sendResponse(res, {
     statusCode: StatusCodes.OK,

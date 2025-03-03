@@ -14,7 +14,7 @@ const listingSchema = new Schema(
     images: { type: String, required: true },
     userID: {
       type: Schema.Types.ObjectId,
-      // ref: 'User',
+      ref: 'User',
     },
     status: { type: String, enum: ['available', 'sold'], default: 'available' },
   },
