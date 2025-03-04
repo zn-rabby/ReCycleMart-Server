@@ -53,7 +53,7 @@ const getOwnListings = async (userEmail: string) => {
  const listing = await Listing.find({userID: user._id})
  console.log(listing)
 
- if(listing.length===0){
+ if(listing.length === 0){
   throw new  AppError(404,"listing Not FOund")
  }
 
