@@ -79,19 +79,19 @@ const createTransaction = async (payload: ITransaction, userEmail: string) => {
   }
 };
 
-
-
 const getSinglePurses = async (userId: string) => {
   const purchases = await Listing.find({ userId }); 
   return purchases;
 };
 
-
-
-
+const getSingleSales = async (userId: string) => {
+  const sales = await Listing.find({ userId }); 
+  return sales;
+};
 
 
 export const TransactionServices = {
   createTransaction,
-  getSinglePurses
+  getSinglePurses,
+  getSingleSales
 };

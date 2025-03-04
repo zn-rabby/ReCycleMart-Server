@@ -39,10 +39,24 @@ const getUserPurchases = catchAsync(async (req, res) => {
   });
 });
 
+const getUserSales = catchAsync(async (req, res) => {
+  const { id: userId } = req.params;
+
+  const result = await TransactionServices.getSinglePurses(userId);
+
+  sendResponse(res, {
+    success: true,
+    statusCode: 200,
+    message: 'User sales retrieved successfully',
+    data: result,
+  });
+});
+
 
 
   export const TransactionController = {
     createTransactionController,
-    getUserPurchases
+    getUserPurchases,
+    getUserSales
   };
   

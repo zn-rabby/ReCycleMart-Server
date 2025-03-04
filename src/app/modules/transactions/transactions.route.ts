@@ -20,6 +20,12 @@ router.get(
   TransactionController.getUserPurchases
 );
 
+router.get(
+  '/sales/:userId',
+  auth(USER_ROLE.user),
+  TransactionController.getUserSales
+);
+
 
 
 export const TransactionRoutes = router;
