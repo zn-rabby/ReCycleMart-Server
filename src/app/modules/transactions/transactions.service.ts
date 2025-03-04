@@ -78,6 +78,20 @@ const createTransaction = async (payload: ITransaction, userEmail: string) => {
     throw new AppError(500, 'Failed to initiate payment.');
   }
 };
+
+
+
+const getSinglePurses = async (userId: string) => {
+  const purchases = await Listing.find({ userId }); 
+  return purchases;
+};
+
+
+
+
+
+
 export const TransactionServices = {
   createTransaction,
+  getSinglePurses
 };

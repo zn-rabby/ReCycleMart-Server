@@ -26,8 +26,23 @@ const createTransactionController = catchAsync(async (req, res) => {
 });
 
 
+const getUserPurchases = catchAsync(async (req, res) => {
+  const { id: userId } = req.params;
+
+  const result = await TransactionServices.getSinglePurses(userId);
+
+  sendResponse(res, {
+    success: true,
+    statusCode: 200,
+    message: 'User purchases retrieved successfully',
+    data: result,
+  });
+});
+
+
 
   export const TransactionController = {
-    createTransactionController
+    createTransactionController,
+    getUserPurchases
   };
   

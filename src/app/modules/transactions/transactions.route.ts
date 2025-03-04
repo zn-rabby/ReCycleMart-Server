@@ -14,5 +14,12 @@ router.post(
 );
 
 
+router.get(
+  '/purchases/:userId',
+  auth(USER_ROLE.user),
+  TransactionController.getUserPurchases
+);
+
+
 
 export const TransactionRoutes = router;
