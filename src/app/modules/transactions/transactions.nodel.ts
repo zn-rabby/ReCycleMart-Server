@@ -23,8 +23,9 @@ const transactionSchema = new Schema<ITransaction>(
       enum: ['pending', 'completed'], 
       default: 'pending' 
     },
+    transactionId: { type: String, required: true, unique: true },
   },
   { timestamps: true }
 );
 
-export const Transaction = mongoose.model<ITransaction >('Transaction', transactionSchema);
+export const Transaction = mongoose.model<ITransaction>('Transaction', transactionSchema);
