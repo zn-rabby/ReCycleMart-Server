@@ -42,6 +42,26 @@ const getAllListing = async (query: Record<string, unknown>) => {
   };
 };
 
+
+const getOwnListings = async (userEmail: string) => {
+ const user = await User.findOne({email: userEmail})
+ console.log(user)
+ if(!user){
+ throw new  AppError(404,"User Not FOund")
+ }
+
+ const listing = await Listing.find({userID: user._id})
+ console.log(listing)
+
+ if(listing.length===0){
+  throw new  AppError(404,"listing Not FOund")
+ }
+
+
+ return listing
+ 
+};
+
 const getSingleListing = async (id: string) => {
   const res = await Listing.findById(id);
 
@@ -83,4 +103,5 @@ export const ListingServices = {
   getSingleListing,
   updateListing,
   deleteListing,
+  getOwnListings
 };

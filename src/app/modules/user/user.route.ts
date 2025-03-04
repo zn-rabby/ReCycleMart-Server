@@ -7,7 +7,7 @@ const router = express.Router();
 
 router.get('/:id', auth(USER_ROLE.user), UserController.getSingleUser);
 
-router.put('/:id', auth(USER_ROLE.user), UserController.updateUser);
+router.patch('/:id', auth(USER_ROLE.user), UserController.updateUser);
 
 router.delete('/:id', auth(USER_ROLE.user), UserController.deleteListing);
 

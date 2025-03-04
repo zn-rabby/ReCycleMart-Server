@@ -79,60 +79,76 @@ const createTransaction = async (payload: ITransaction, userEmail: string) => {
   }
 };
 
-const getSinglePurses = async (userId: string) => {
-  const purchases = await Transaction.find({ userId }); 
-  return purchases;
+// const getUserPurses = async (userId: string) => {
+//   console.log(userId)
+
+//   const user = await User.findOne({userId})
+//   if(!user){
+//  throw new  AppError(404,"User Not FOund")
+//  }
+
+//  const transaction = await Transaction.find({userID: user.buyerID})
+//  console.log(transaction)
+
+//   const purchases = await Transaction.find({ userId }); 
+//   return purchases;
+// };
+
+
+const getUserPurses = async (userId: string) => {
+  console.log('userID:', userId);
+  const user = await User.findById(userId);
+
+  if (!user) {
+    throw new AppError(404, 'User not found');
+  }
+  const transactions = await Transaction.find({ buyerID: user._id })
+    .populate('itemID')        
+    .populate('sellerID');     
+
+  if (transactions.length === 0) {
+    throw new AppError(404, 'No purchases found for this user');
+  }
+  return transactions;
 };
 
-const getSingleSales = async (userId: string) => {
-  const sales = await Transaction.find({ userId }); 
-  return sales;
+const getUserSales = async (userId: string) => {
+  console.log('userID:', userId);
+  const user = await User.findById(userId);
+
+  if (!user) {
+    throw new AppError(404, 'User not found');
+  }
+  const transactions = await Transaction.find({ sellerID: user._id })
+    .populate('itemID')        
+    .populate('buyerID');     
+
+  if (transactions.length === 0) {
+    throw new AppError(404, 'No purchases found for this user');
+  }
+  return transactions;
 };
 
 
 const updateTransaction = async (id: string, payload: Partial<ITransaction>) => {
+  const order = await Transaction.findById({ _id: id });
 
-
-  // Find transaction by userId
-  const transaction = await Transaction.findById({ _id: id });
-
-  if (!transaction) {
-    throw new AppError(404, 'Transaction not found!');
+  if (!order) {
+    throw new AppError(404, 'Blog not found! You cannot update it.');
   }
-
-  // Update the found transaction
-  const result = await Transaction.findByIdAndUpdate(
-     id ,  // Find by userId
-    payload,
-    {
-      new: true,
-      runValidators: true,
-    }
-  );
+  const result = await Transaction.findByIdAndUpdate(id, payload, {
+    new: true,
+    runValidators: true,
+  });
 
   return result;
 };
 
 
-// const updateTransaction = async (id: string, payload: Partial<ITransaction>) => {
-//   const order = await Transaction.findById({ _id: id });
-
-//   if (!order) {
-//     throw new AppError(404, 'Blog not found! You cannot update it.');
-//   }
-//   const result = await Transaction.findByIdAndUpdate(id, payload, {
-//     new: true,
-//     runValidators: true,
-//   });
-
-//   return result;
-// };
-
-
 
 export const TransactionServices = {
   createTransaction,
-  getSinglePurses,
-  getSingleSales,
+  getUserPurses,
+  getUserSales,
   updateTransaction
 };

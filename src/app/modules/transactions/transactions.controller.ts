@@ -27,9 +27,10 @@ const createTransactionController = catchAsync(async (req, res) => {
 
 
 const getUserPurchases = catchAsync(async (req, res) => {
-  const { id: userId } = req.params;
+  const { userId } = req.params; 
+  console.log(userId, "userId from params");
 
-  const result = await TransactionServices.getSinglePurses(userId);
+  const result = await TransactionServices.getUserPurses(userId);
 
   sendResponse(res, {
     success: true,
@@ -39,10 +40,12 @@ const getUserPurchases = catchAsync(async (req, res) => {
   });
 });
 
+
 const getUserSales = catchAsync(async (req, res) => {
   const { id: userId } = req.params;
+  console.log(userId)
 
-  const result = await TransactionServices.getSinglePurses(userId);
+  const result = await TransactionServices.getUserSales(userId);
 
   sendResponse(res, {
     success: true,

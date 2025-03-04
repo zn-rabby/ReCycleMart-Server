@@ -14,12 +14,14 @@ router.post(
   ListingController.createListing,
 );
 
+router.get('/my-listings', auth(USER_ROLE.user), ListingController.getOwnListings);
 router.delete('/:id',auth(USER_ROLE.user), ListingController.deleteListing);
 
-router.put('/:id',auth(USER_ROLE.user), ListingController.updateListing);
+router.patch('/:id',auth(USER_ROLE.user), ListingController.updateListing);
 
 router.get('/:id', ListingController.getSingleListing);
 
 router.get('/', ListingController.getAllListing);
+
 
 export const ListingRoutes = router;
