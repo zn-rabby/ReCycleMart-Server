@@ -26,6 +26,12 @@ router.get(
   TransactionController.getUserSales
 );
 
+router.patch(
+  '/:id',
+  auth(USER_ROLE.user),
+  TransactionController.updateTransactionStatus
+);
+
 
 
 export const TransactionRoutes = router;

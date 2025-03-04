@@ -53,10 +53,43 @@ const getUserSales = catchAsync(async (req, res) => {
 });
 
 
+const updateTransactionStatus = catchAsync(async (req, res) => {
+  const id = req.params.id;
+  // console.log(userId, "controller", req.params);
+
+  const updatedData = req.body;
+
+  const result = await TransactionServices.updateTransaction(id, updatedData);
+
+  sendResponse(res, {
+    statusCode: 200,
+    success: true,
+    message: 'Transaction Status updated successfully',
+    data: result,
+  });
+});
+
+// const updateTransactionStatus = catchAsync(async (req, res) => {
+//   const id = req.params.id;
+//   const updatedData = req.body;
+//   // const userEmail = req?.user?.email;
+
+//   const result = await TransactionServices.updateTransaction(id, updatedData);
+
+//   sendResponse(res, {
+//     statusCode: 200,
+//     success: true,
+//     message: 'Order updated successfully',
+//     data: result,
+//   });
+// });
+
+
 
   export const TransactionController = {
     createTransactionController,
     getUserPurchases,
-    getUserSales
+    getUserSales,
+    updateTransactionStatus
   };
   

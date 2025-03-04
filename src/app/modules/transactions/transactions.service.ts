@@ -80,18 +80,59 @@ const createTransaction = async (payload: ITransaction, userEmail: string) => {
 };
 
 const getSinglePurses = async (userId: string) => {
-  const purchases = await Listing.find({ userId }); 
+  const purchases = await Transaction.find({ userId }); 
   return purchases;
 };
 
 const getSingleSales = async (userId: string) => {
-  const sales = await Listing.find({ userId }); 
+  const sales = await Transaction.find({ userId }); 
   return sales;
 };
+
+
+const updateTransaction = async (id: string, payload: Partial<ITransaction>) => {
+
+
+  // Find transaction by userId
+  const transaction = await Transaction.findById({ _id: id });
+
+  if (!transaction) {
+    throw new AppError(404, 'Transaction not found!');
+  }
+
+  // Update the found transaction
+  const result = await Transaction.findByIdAndUpdate(
+     id ,  // Find by userId
+    payload,
+    {
+      new: true,
+      runValidators: true,
+    }
+  );
+
+  return result;
+};
+
+
+// const updateTransaction = async (id: string, payload: Partial<ITransaction>) => {
+//   const order = await Transaction.findById({ _id: id });
+
+//   if (!order) {
+//     throw new AppError(404, 'Blog not found! You cannot update it.');
+//   }
+//   const result = await Transaction.findByIdAndUpdate(id, payload, {
+//     new: true,
+//     runValidators: true,
+//   });
+
+//   return result;
+// };
+
 
 
 export const TransactionServices = {
   createTransaction,
   getSinglePurses,
-  getSingleSales
+  getSingleSales,
+  updateTransaction
 };
