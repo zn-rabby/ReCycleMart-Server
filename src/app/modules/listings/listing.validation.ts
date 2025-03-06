@@ -38,7 +38,9 @@ const createListingValidationSchema = z.object({
     location: z.string({
       required_error: 'Location is required',
     }),
-
+    stock: z.number({
+      required_error: "Product stock is required",
+    }).min(0, "Product stock cannot be less than 0"),
 
     userID: z.string().min(1, 'User ID cannot be empty').optional(),
 
@@ -64,6 +66,7 @@ const updateListingValidationSchema = z.object({
     price: z.number().min(0, 'Price cannot be negative').optional(),
 
     condition: z.enum(['new', 'used', 'refurbished']).optional(),
+    stock: z.number().min(0, "Product stock cannot be less than 0").optional(),
 
     images: z.array(z.string().url('Each image must be a valid URL')).optional(),
 

@@ -19,6 +19,16 @@ const listingSchema = new Schema(
       ref: 'User',
       required: true,
     },
+    ratingCount: {
+      type: Number,
+      default: 0,
+      min: 0,
+   },
+   stock: {
+    type: Number,
+    required: [true, 'Product stock is required'],
+    min: 0,
+ },
     status: {
       type: String,
       enum: ['available', 'sold', 'pending', 'hidden'],
