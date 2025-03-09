@@ -3,6 +3,11 @@ import { z } from 'zod';
 // Create Listing Validation Schema
 const createListingValidationSchema = z.object({
   body: z.object({
+    name: z
+      .string({
+        required_error: 'Listing title is required',
+      })
+      .min(1, 'Listing title cannot be empty'),
     title: z
       .string({
         required_error: 'Listing title is required',
@@ -31,8 +36,8 @@ const createListingValidationSchema = z.object({
       })
       .nonempty('At least one image is required'),
 
-    category: z.string({
-      required_error: 'Category is required',
+    category:  z.enum(['electronics' , 'clothing' , 'gadgets' , 'sports'], {
+      required_error: 'Condition is required',
     }),
 
     location: z.string({
@@ -59,6 +64,7 @@ const createListingValidationSchema = z.object({
 // Update Listing Validation Schema (all optional)
 const updateListingValidationSchema = z.object({
   body: z.object({
+    name: z.string().min(1, 'Listing name cannot be empty').optional(),
     title: z.string().min(1, 'Listing title cannot be empty').optional(),
 
     description: z.string().min(1, 'Listing description cannot be empty').optional(),
@@ -70,7 +76,9 @@ const updateListingValidationSchema = z.object({
 
     images: z.array(z.string().url('Each image must be a valid URL')).optional(),
 
-    category: z.string().optional(),
+    category:  z.enum(['electronics' , 'clothing' , 'gadgets' , 'sports'], {
+      required_error: 'Condition is required',
+    }).optional(),
 
     location: z.string().optional(),
 

@@ -3,6 +3,7 @@ import { IListing } from './listing.interface';
 
 const listingSchema = new Schema(
   {
+    name: { type: String, required: true },
     title: { type: String, required: true },
     description: { type: String, required: true },
     price: { type: Number, required: true },
@@ -12,7 +13,11 @@ const listingSchema = new Schema(
       required: true,
     },
     images: { type: [String], required: true }, // array of image URLs
-    category: { type: String, required: true },
+    category: { 
+      type: String,
+      enum: ['electronics' , 'clothing' , 'gadgets' , 'sports'],
+      required: true,
+     },
     location: { type: String, required: true },
     userID: {
       type: Schema.Types.ObjectId,
