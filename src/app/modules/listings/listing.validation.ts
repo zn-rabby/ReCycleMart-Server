@@ -53,7 +53,7 @@ const createListingValidationSchema = z.object({
       .enum(['available', 'sold', 'pending', 'hidden'])
       .default('available'),
 
-    views: z.number().optional(),
+  
 
     negotiable: z.boolean().optional(),
 
@@ -87,7 +87,7 @@ const updateListingValidationSchema = z.object({
 
     status: z.enum(['available', 'sold', 'pending', 'hidden']).optional(),
 
-    views: z.number().optional(),
+
 
     negotiable: z.boolean().optional(),
 

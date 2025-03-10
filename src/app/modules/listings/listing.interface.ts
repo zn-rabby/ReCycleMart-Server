@@ -11,7 +11,6 @@ export type IListing = {
   location: string; 
   userID?: Types.ObjectId; 
   status: 'available' | 'sold' | 'pending' | 'hidden'; 
-  views?: number; 
   createdAt?: Date;
   updatedAt?: Date;
   negotiable?: boolean; 

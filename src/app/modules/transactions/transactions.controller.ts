@@ -27,10 +27,10 @@ const createTransactionController = catchAsync(async (req, res) => {
 
 
 const getUserPurchases = catchAsync(async (req, res) => {
-  const { userId } = req.params; 
-  console.log(userId, "userId from params");
+  const { email } = req.user; // Assuming the authenticated user's email is stored in req.user
+  // console.log(email, "userEmail from authenticated user");
 
-  const result = await TransactionServices.getUserPurses(userId);
+  const result = await TransactionServices.getUserPurchases(email, req.query);
 
   sendResponse(res, {
     success: true,
@@ -40,12 +40,10 @@ const getUserPurchases = catchAsync(async (req, res) => {
   });
 });
 
-
 const getUserSales = catchAsync(async (req, res) => {
-  const { id: userId } = req.params;
-  console.log(userId)
+  const { email } = req.user; 
 
-  const result = await TransactionServices.getUserSales(userId);
+  const result = await TransactionServices.getUserSales(email, req.query);
 
   sendResponse(res, {
     success: true,

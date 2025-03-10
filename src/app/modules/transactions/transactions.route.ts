@@ -15,13 +15,13 @@ router.post(
 
 
 router.get(
-  '/purchases/:userId',
+  '/purchases',
   auth(USER_ROLE.user),
   TransactionController.getUserPurchases
 );
 
 router.get(
-  '/sales/:userId',
+  '/sales',
   auth(USER_ROLE.user),
   TransactionController.getUserSales
 );

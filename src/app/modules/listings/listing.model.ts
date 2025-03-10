@@ -39,7 +39,6 @@ const listingSchema = new Schema(
       enum: ['available', 'sold', 'pending', 'hidden'],
       default: 'available',
     },
-    views: { type: Number, default: 0 },
     negotiable: { type: Boolean, default: false },
     contactMethod: {
       type: String,

@@ -80,6 +80,7 @@ const updateListing = async (id: string, payload: Partial<IListing>) => {
     new: true,
     runValidators: true,
   });
+  console.log(result,"service")
 
   return result;
 };
