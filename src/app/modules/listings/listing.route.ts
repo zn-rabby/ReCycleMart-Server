@@ -13,15 +13,15 @@ router.post(
   validateRequest(listingValidation.createListingValidationSchema),
   ListingController.createListing,
 );
+router.get('/', ListingController.getAllListing);
+router.get('/:id', ListingController.getSingleListing);
 
 router.get('/my-listings', auth(USER_ROLE.user), ListingController.getOwnListings);
-router.delete('/:id',auth(USER_ROLE.user), ListingController.deleteListing);
 
 router.patch('/:id',auth(USER_ROLE.user), ListingController.updateListing);
 
-router.get('/:id', ListingController.getSingleListing);
 
-router.get('/', ListingController.getAllListing);
 
+router.delete('/:id',auth(USER_ROLE.user), ListingController.deleteListing);
 
 export const ListingRoutes = router;

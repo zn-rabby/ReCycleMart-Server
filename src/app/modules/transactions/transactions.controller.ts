@@ -36,7 +36,8 @@ const getUserPurchases = catchAsync(async (req, res) => {
     success: true,
     statusCode: 200,
     message: 'User purchases retrieved successfully',
-    data: result,
+    meta: result.meta,
+    data: result.result,
   });
 });
 
@@ -49,7 +50,8 @@ const getUserSales = catchAsync(async (req, res) => {
     success: true,
     statusCode: 200,
     message: 'User sales retrieved successfully',
-    data: result,
+    meta: result.meta,
+    data: result.result,
   });
 });
 

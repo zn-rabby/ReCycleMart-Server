@@ -76,11 +76,11 @@ const updateListing = async (id: string, payload: Partial<IListing>) => {
     throw new AppError(404, 'Listing not found!');
   }
 
-  const result = await Listing.findByIdAndUpdate(id, payload, {
+  const result = await Listing.findOneAndUpdate({_id:id}, payload, {
+
     new: true,
     runValidators: true,
   });
-  console.log(result,"service")
 
   return result;
 };

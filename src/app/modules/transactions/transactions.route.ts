@@ -4,6 +4,7 @@ import express from 'express';
 import auth from '../../middleware/auth';
 import { USER_ROLE } from '../user/user.constant';
 import { TransactionController } from './transactions.controller';
+import { PaymentControllers } from './payment.controller';
 
 const router = express.Router();
 
@@ -30,6 +31,22 @@ router.patch(
   '/:id',
   auth(USER_ROLE.user),
   TransactionController.updateTransactionStatus
+);
+
+
+router.post(
+  '/success/:transactionId',
+  PaymentControllers.paymentSuccessController,
+);
+
+router.post(
+  '/failed/:transactionId',
+  PaymentControllers.paymentFailController,
+);
+
+router.post(
+  '/cancelled/:transactionId',
+  PaymentControllers.paymentCancelController,
 );
 
 
