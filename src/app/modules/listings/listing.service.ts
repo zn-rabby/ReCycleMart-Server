@@ -42,6 +42,28 @@ const getAllListing = async (query: Record<string, unknown>) => {
   };
 };
 
+const getListingByUser = async (email: string, query: Record<string, unknown>) => {
+  const user = await User.isUserExists(email);
+  if (!user) {
+    throw new AppError(404, 'User not found');
+  }
+
+  const listingQuery = new QueryBuilder(Listing.find({ userID: user._id }).populate('userID'), query)
+    .search(ListingSearchableFields)
+    .filter()
+    .sort()
+    .paginate()
+    .fields();
+
+  const meta = await listingQuery.countTotal();
+  const result = await listingQuery.modelQuery;
+
+  return {
+    meta,
+    result,
+  };
+};
+
 
 const getOwnListings = async (userEmail: string) => {
  const user = await User.findOne({email: userEmail})
@@ -104,5 +126,6 @@ export const ListingServices = {
   getSingleListing,
   updateListing,
   deleteListing,
-  getOwnListings
+  getOwnListings,
+  getListingByUser
 };

@@ -14,6 +14,13 @@ router.post(
   ListingController.createListing,
 );
 router.get('/', ListingController.getAllListing);
+
+router.get(
+  '/user',
+  auth(USER_ROLE.user, USER_ROLE.admin),
+  ListingController.getListingByUser,
+);
+
 router.get('/:id', ListingController.getSingleListing);
 
 router.get('/my-listings', auth(USER_ROLE.user), ListingController.getOwnListings);

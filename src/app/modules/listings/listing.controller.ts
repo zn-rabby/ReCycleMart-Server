@@ -29,6 +29,19 @@ const getAllListing = catchAsync(async (req, res) => {
   });
 });
 
+const getListingByUser = catchAsync(async (req, res) => {
+  const { email } = req.user;
+  const result = await ListingServices.getListingByUser(email, req.query);
+
+  sendResponse(res, {
+    statusCode: StatusCodes.OK,
+    success: true,
+    message: 'Listings retrieved successfully',
+    meta: result.meta,
+    data: result.result,
+  });
+});
+
 
 const getOwnListings = catchAsync(async (req: Request, res: Response) => {
   const userEmail= req.user?.email; 
@@ -90,5 +103,6 @@ export const ListingController = {
   getSingleListing,
   updateListing,
   deleteListing,
-  getOwnListings
+  getOwnListings,
+  getListingByUser
 };
