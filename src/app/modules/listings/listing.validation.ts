@@ -36,24 +36,24 @@ const createListingValidationSchema = z.object({
       })
       .nonempty('At least one image is required'),
 
-    category:  z.enum(['electronics' , 'clothing' , 'gadgets' , 'sports'], {
+    category: z.enum(['electronics', 'clothing', 'gadgets', 'sports'], {
       required_error: 'Condition is required',
     }),
 
     location: z.string({
       required_error: 'Location is required',
     }),
-    stock: z.number({
-      required_error: "Product stock is required",
-    }).min(0, "Product stock cannot be less than 0"),
+    stock: z
+      .number({
+        required_error: 'Product stock is required',
+      })
+      .min(0, 'Product stock cannot be less than 0'),
 
     userID: z.string().min(1, 'User ID cannot be empty').optional(),
 
     status: z
       .enum(['available', 'sold', 'pending', 'hidden'])
       .default('available'),
-
-  
 
     negotiable: z.boolean().optional(),
 
@@ -67,27 +67,31 @@ const updateListingValidationSchema = z.object({
     name: z.string().min(1, 'Listing name cannot be empty').optional(),
     title: z.string().min(1, 'Listing title cannot be empty').optional(),
 
-    description: z.string().min(1, 'Listing description cannot be empty').optional(),
+    description: z
+      .string()
+      .min(1, 'Listing description cannot be empty')
+      .optional(),
 
     price: z.number().min(0, 'Price cannot be negative').optional(),
 
     condition: z.enum(['new', 'used', 'refurbished']).optional(),
-    stock: z.number().min(0, "Product stock cannot be less than 0").optional(),
+    stock: z.number().min(0, 'Product stock cannot be less than 0').optional(),
 
-    images: z.array(z.string().url('Each image must be a valid URL')).optional(),
+    images: z
+      .array(z.string().url('Each image must be a valid URL'))
+      .optional(),
 
-    category:  z.enum(['electronics' , 'clothing' , 'gadgets' , 'sports'], {
-      required_error: 'Condition is required',
-    }).optional(),
+    category: z
+      .enum(['electronics', 'clothing', 'gadgets', 'sports'], {
+        required_error: 'Condition is required',
+      })
+      .optional(),
 
     location: z.string().optional(),
-
 
     userID: z.string().min(1, 'User ID cannot be empty').optional(),
 
     status: z.enum(['available', 'sold', 'pending', 'hidden']).optional(),
-
-
 
     negotiable: z.boolean().optional(),
 

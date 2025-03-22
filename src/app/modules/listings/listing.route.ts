@@ -9,7 +9,8 @@ import { USER_ROLE } from '../user/user.constant';
 const router = express.Router();
 
 router.post(
-  '/',auth(USER_ROLE.user),
+  '/',
+  auth(USER_ROLE.user),
   validateRequest(listingValidation.createListingValidationSchema),
   ListingController.createListing,
 );
@@ -23,12 +24,14 @@ router.get(
 
 router.get('/:id', ListingController.getSingleListing);
 
-router.get('/my-listings', auth(USER_ROLE.user), ListingController.getOwnListings);
+router.get(
+  '/my-listings',
+  auth(USER_ROLE.user),
+  ListingController.getOwnListings,
+);
 
-router.patch('/:id',auth(USER_ROLE.user), ListingController.updateListing);
+router.patch('/:id', auth(USER_ROLE.user), ListingController.updateListing);
 
-
-
-router.delete('/:id',auth(USER_ROLE.user), ListingController.deleteListing);
+router.delete('/:id', auth(USER_ROLE.user), ListingController.deleteListing);
 
 export const ListingRoutes = router;

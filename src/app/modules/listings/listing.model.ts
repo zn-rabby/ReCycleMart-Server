@@ -13,11 +13,11 @@ const listingSchema = new Schema(
       required: true,
     },
     images: { type: [String], required: true }, // array of image URLs
-    category: { 
+    category: {
       type: String,
-      enum: ['electronics' , 'clothing' , 'gadgets' , 'sports'],
+      enum: ['electronics', 'clothing', 'gadgets', 'sports'],
       required: true,
-     },
+    },
     location: { type: String, required: true },
     userID: {
       type: Schema.Types.ObjectId,
@@ -28,12 +28,12 @@ const listingSchema = new Schema(
       type: Number,
       default: 0,
       min: 0,
-   },
-   stock: {
-    type: Number,
-    required: [true, 'Product stock is required'],
-    min: 0,
- },
+    },
+    stock: {
+      type: Number,
+      required: [true, 'Product stock is required'],
+      min: 0,
+    },
     status: {
       type: String,
       enum: ['available', 'sold', 'pending', 'hidden'],
@@ -46,7 +46,7 @@ const listingSchema = new Schema(
       default: 'chat',
     },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
 export const Listing = mongoose.model<IListing>('Listing', listingSchema);

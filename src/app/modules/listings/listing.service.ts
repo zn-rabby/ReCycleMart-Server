@@ -7,7 +7,7 @@ import { Listing } from './listing.model';
 
 // create listing
 const createListing = async (payload: IListing, userEmail: string) => {
-  const user = await User.isUserExists(userEmail);  // Use User model to check user existence
+  const user = await User.isUserExists(userEmail); // Use User model to check user existence
 
   if (!user) {
     throw new AppError(404, 'User not found!');
@@ -21,9 +21,11 @@ const createListing = async (payload: IListing, userEmail: string) => {
   return result;
 };
 
-
 const getAllListing = async (query: Record<string, unknown>) => {
-  const listingQuery = new QueryBuilder(Listing.find().populate('userID'), query)
+  const listingQuery = new QueryBuilder(
+    Listing.find().populate('userID'),
+    query,
+  )
     .search(ListingSearchableFields)
     .filter()
     .sort()
@@ -42,13 +44,19 @@ const getAllListing = async (query: Record<string, unknown>) => {
   };
 };
 
-const getListingByUser = async (email: string, query: Record<string, unknown>) => {
+const getListingByUser = async (
+  email: string,
+  query: Record<string, unknown>,
+) => {
   const user = await User.isUserExists(email);
   if (!user) {
     throw new AppError(404, 'User not found');
   }
 
-  const listingQuery = new QueryBuilder(Listing.find({ userID: user._id }).populate('userID'), query)
+  const listingQuery = new QueryBuilder(
+    Listing.find({ userID: user._id }).populate('userID'),
+    query,
+  )
     .search(ListingSearchableFields)
     .filter()
     .sort()
@@ -64,24 +72,21 @@ const getListingByUser = async (email: string, query: Record<string, unknown>) =
   };
 };
 
-
 const getOwnListings = async (userEmail: string) => {
- const user = await User.findOne({email: userEmail})
- console.log(user)
- if(!user){
- throw new  AppError(404,"User Not FOund")
- }
+  const user = await User.findOne({ email: userEmail });
+  console.log(user);
+  if (!user) {
+    throw new AppError(404, 'User Not FOund');
+  }
 
- const listing = await Listing.find({userID: user._id})
- console.log(listing)
+  const listing = await Listing.find({ userID: user._id });
+  console.log(listing);
 
- if(listing.length === 0){
-  throw new  AppError(404,"listing Not FOund")
- }
+  if (listing.length === 0) {
+    throw new AppError(404, 'listing Not FOund');
+  }
 
-
- return listing
- 
+  return listing;
 };
 
 const getSingleListing = async (id: string) => {
@@ -98,8 +103,7 @@ const updateListing = async (id: string, payload: Partial<IListing>) => {
     throw new AppError(404, 'Listing not found!');
   }
 
-  const result = await Listing.findOneAndUpdate({_id:id}, payload, {
-
+  const result = await Listing.findOneAndUpdate({ _id: id }, payload, {
     new: true,
     runValidators: true,
   });
@@ -127,5 +131,5 @@ export const ListingServices = {
   updateListing,
   deleteListing,
   getOwnListings,
-  getListingByUser
+  getListingByUser,
 };

@@ -1,12 +1,12 @@
-import mongoose from "mongoose";
-import AppError from "../../errors/appError";
-import { Listing } from "../listings/listing.model";
-import User from "../user/user.model";
-import { ITransaction } from "./transactions.interface";
-import { Transaction } from "./transactions.nodel";
-import { generateTransactionId } from "./transaction.utils";
-import { SSLCommerzService } from "./sslcommerz.service";
-import QueryBuilder from "../../builder/QueryBuilder";
+import mongoose from 'mongoose';
+import AppError from '../../errors/appError';
+import { Listing } from '../listings/listing.model';
+import User from '../user/user.model';
+import { ITransaction } from './transactions.interface';
+import { Transaction } from './transactions.nodel';
+import { generateTransactionId } from './transaction.utils';
+import { SSLCommerzService } from './sslcommerz.service';
+import QueryBuilder from '../../builder/QueryBuilder';
 
 const createTransaction = async (payload: ITransaction, userEmail: string) => {
   try {
@@ -80,9 +80,6 @@ const createTransaction = async (payload: ITransaction, userEmail: string) => {
   }
 };
 
-
-
-
 // const getUserPurses = async (userId: string) => {
 //   console.log('userID:', userId);
 //   const user = await User.findById(userId);
@@ -91,8 +88,8 @@ const createTransaction = async (payload: ITransaction, userEmail: string) => {
 //     throw new AppError(404, 'User not found');
 //   }
 //   const transactions = await Transaction.find({ buyerID: user._id })
-//     .populate('itemID')        
-//     .populate('sellerID');     
+//     .populate('itemID')
+//     .populate('sellerID');
 
 //   if (transactions.length === 0) {
 //     throw new AppError(404, 'No purchases found for this user');
@@ -108,8 +105,8 @@ const createTransaction = async (payload: ITransaction, userEmail: string) => {
 //     throw new AppError(404, 'User not found');
 //   }
 //   const transactions = await Transaction.find({ sellerID: user._id })
-//     .populate('itemID')        
-//     .populate('buyerID');     
+//     .populate('itemID')
+//     .populate('buyerID');
 
 //   if (transactions.length === 0) {
 //     throw new AppError(404, 'No purchases found for this user');
@@ -117,8 +114,10 @@ const createTransaction = async (payload: ITransaction, userEmail: string) => {
 //   return transactions;
 // };
 
-
-const getUserPurchases = async (email: string, query: Record<string, unknown>) => {
+const getUserPurchases = async (
+  email: string,
+  query: Record<string, unknown>,
+) => {
   const user = await User.isUserExists(email);
   if (!user) {
     throw new AppError(404, 'User not found');
@@ -127,19 +126,20 @@ const getUserPurchases = async (email: string, query: Record<string, unknown>) =
   const purchasesHistoryQuery = new QueryBuilder(
     // Transaction.find({ buyerID: user._id, itemID: { $in: activeListing } })
     Transaction.find({ buyerID: user._id })
-      .populate('buyerID', "_id name identifier role")
-      .populate('sellerID', "_id name identifier role")
-      .populate("itemID"),
-    query
-  ).sort().paginate();
+      .populate('buyerID', '_id name identifier role')
+      .populate('sellerID', '_id name identifier role')
+      .populate('itemID'),
+    query,
+  )
+    .sort()
+    .paginate();
   const meta = await purchasesHistoryQuery.countTotal();
   const result = await purchasesHistoryQuery.modelQuery;
 
   return { meta, result };
 };
 
-
-const getUserSales = async (email: string, query: Record<string, unknown>)  => {
+const getUserSales = async (email: string, query: Record<string, unknown>) => {
   const user = await User.isUserExists(email);
   if (!user) {
     throw new AppError(404, 'User not found');
@@ -148,19 +148,23 @@ const getUserSales = async (email: string, query: Record<string, unknown>)  => {
   const selsHistoryQuery = new QueryBuilder(
     // Transaction.find({ buyerID: user._id, itemID: { $in: activeListing } })
     Transaction.find({ sellerID: user._id })
-      .populate('buyerID', "_id name identifier role")
-      .populate('sellerID', "_id name identifier role")
-      .populate("itemID"),
-    query
-  ).sort().paginate();
+      .populate('buyerID', '_id name identifier role')
+      .populate('sellerID', '_id name identifier role')
+      .populate('itemID'),
+    query,
+  )
+    .sort()
+    .paginate();
   const meta = await selsHistoryQuery.countTotal();
   const result = await selsHistoryQuery.modelQuery;
 
   return { meta, result };
 };
 
-
-const updateTransaction = async (id: string, payload: Partial<ITransaction>) => {
+const updateTransaction = async (
+  id: string,
+  payload: Partial<ITransaction>,
+) => {
   const order = await Transaction.findById({ _id: id });
 
   if (!order) {
@@ -174,11 +178,9 @@ const updateTransaction = async (id: string, payload: Partial<ITransaction>) => 
   return result;
 };
 
-
-
 export const TransactionServices = {
   createTransaction,
   getUserPurchases,
   getUserSales,
-  updateTransaction
+  updateTransaction,
 };

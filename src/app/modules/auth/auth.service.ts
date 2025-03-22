@@ -16,8 +16,6 @@ const register = async (payload: IUser) => {
   return result;
 };
 
-
-
 const login = async (payload: { email: string; password: string }) => {
   const user = await User.findOne({ email: payload?.email }).select(
     '+password',

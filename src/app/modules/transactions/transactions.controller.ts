@@ -1,18 +1,18 @@
-
-import { Request, Response } from "express";
-import catchAsync from "../../utils/catchAsync";
-import sendResponse from "../../utils/sendResponse";
-import { TransactionServices } from "./transactions.service";
-import { Document } from "mongoose";
-
+import { Request, Response } from 'express';
+import catchAsync from '../../utils/catchAsync';
+import sendResponse from '../../utils/sendResponse';
+import { TransactionServices } from './transactions.service';
+import { Document } from 'mongoose';
 
 const createTransactionController = catchAsync(async (req, res) => {
   const transactionPayload = req.body;
   const userEmail = req?.user?.email;
 
-  const { createdOrder, paymentUrl } = await TransactionServices.createTransaction(transactionPayload, userEmail);
+  const { createdOrder, paymentUrl } =
+    await TransactionServices.createTransaction(transactionPayload, userEmail);
 
-  const orderData = createdOrder instanceof Document ? createdOrder.toObject() : createdOrder;
+  const orderData =
+    createdOrder instanceof Document ? createdOrder.toObject() : createdOrder;
 
   sendResponse(res, {
     success: true,
@@ -24,7 +24,6 @@ const createTransactionController = catchAsync(async (req, res) => {
     },
   });
 });
-
 
 const getUserPurchases = catchAsync(async (req, res) => {
   const { email } = req.user; // Assuming the authenticated user's email is stored in req.user
@@ -42,7 +41,7 @@ const getUserPurchases = catchAsync(async (req, res) => {
 });
 
 const getUserSales = catchAsync(async (req, res) => {
-  const { email } = req.user; 
+  const { email } = req.user;
 
   const result = await TransactionServices.getUserSales(email, req.query);
 
@@ -54,7 +53,6 @@ const getUserSales = catchAsync(async (req, res) => {
     data: result.result,
   });
 });
-
 
 const updateTransactionStatus = catchAsync(async (req, res) => {
   const id = req.params.id;
@@ -87,12 +85,9 @@ const updateTransactionStatus = catchAsync(async (req, res) => {
 //   });
 // });
 
-
-
-  export const TransactionController = {
-    createTransactionController,
-    getUserPurchases,
-    getUserSales,
-    updateTransactionStatus
-  };
-  
+export const TransactionController = {
+  createTransactionController,
+  getUserPurchases,
+  getUserSales,
+  updateTransactionStatus,
+};

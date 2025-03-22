@@ -2,14 +2,13 @@ import { Types } from 'mongoose';
 
 export type ITransaction = {
   transactionId?: string;
-  buyerID?: Types.ObjectId;    
-  sellerID?: Types.ObjectId;   
-  itemID: Types.ObjectId;    
-  status: 'pending' | 'completed'; 
+  buyerID?: Types.ObjectId;
+  sellerID?: Types.ObjectId;
+  itemID: Types.ObjectId;
+  status: 'pending' | 'completed';
   createdAt?: Date;
   updatedAt?: Date;
 };
-
 
 export type TPaymentResponse = {
   total_amount: number; // Total payment amount

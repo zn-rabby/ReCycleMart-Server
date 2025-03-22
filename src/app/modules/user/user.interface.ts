@@ -2,7 +2,7 @@ import { Model } from 'mongoose';
 import { USER_ROLE } from './user.constant';
 
 export type IUser = {
-  _id:string;
+  _id: string;
   name: string;
   email: string;
   phoneNumber: string;
@@ -27,7 +27,6 @@ export type ILoginUser = {
   email: string;
   password: string;
 };
-
 
 export interface IJwtPayload {
   userId: string;

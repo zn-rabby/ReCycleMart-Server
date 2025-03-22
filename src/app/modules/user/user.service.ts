@@ -5,7 +5,7 @@ import User from './user.model';
 
 const getSingleUser = async (id: string) => {
   const user = await User.findById(id);
-  console.log(id,"id",user)
+  console.log(id, 'id', user);
   return user;
 };
 
@@ -40,8 +40,8 @@ const deleteUser = async (id: string) => {
 
 const myProfile = async (email: string) => {
   // Find the user by email and exclude the password field
-  const user = await User.findOne({ email }).select("-password");
-  console.log(user)
+  const user = await User.findOne({ email }).select('-password');
+  console.log(user);
 
   if (!user) {
     throw new AppError(404, 'User not found!');
@@ -53,5 +53,6 @@ const myProfile = async (email: string) => {
 export const UserServices = {
   getSingleUser,
   updateUser,
-  deleteUser,myProfile
+  deleteUser,
+  myProfile,
 };

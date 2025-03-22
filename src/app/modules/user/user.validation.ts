@@ -6,7 +6,7 @@ const registerUserValidationSchema = z.object({
     email: z.string(),
     password: z.string(),
     role: z.enum(['admin', 'user']).default('user').optional(),
-    status:z.enum(['ban' , 'unban']).default('unban').optional(),
+    status: z.enum(['ban', 'unban']).default('unban').optional(),
     isBlocked: z.boolean().default(false),
   }),
 });

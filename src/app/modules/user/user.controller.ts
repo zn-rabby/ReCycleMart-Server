@@ -43,7 +43,7 @@ const deleteListing = catchAsync(async (req, res) => {
 const myProfile = catchAsync(async (req, res) => {
   const { email } = req.user; // Ensure `auth` middleware attaches the user's email to `req.user`
   const result = await UserServices.myProfile(email);
-  console.log(result)
+  console.log(result);
 
   sendResponse(res, {
     statusCode: 200,
@@ -56,5 +56,6 @@ const myProfile = catchAsync(async (req, res) => {
 export const UserController = {
   getSingleUser,
   updateUser,
-  deleteListing,myProfile
+  deleteListing,
+  myProfile,
 };
