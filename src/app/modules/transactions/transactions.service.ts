@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import mongoose from 'mongoose';
 import AppError from '../../errors/appError';
 import { Listing } from '../listings/listing.model';
@@ -34,15 +35,15 @@ const createTransaction = async (payload: ITransaction, userEmail: string) => {
     const transactionId = generateTransactionId();
     payload.transactionId = transactionId;
 
-    console.log('Initiating payment with transaction ID:', transactionId);
+    // console.log('Initiating payment with transaction ID:', transactionId);
 
     const paymentResponse = await SSLCommerzService.initiatePayment({
       total_amount: listing.price,
       currency: 'BDT',
       tran_id: transactionId,
-      success_url: `https://second-hand-server-puce.vercel.app/api/v1/transactions/success/${transactionId}`,
-      fail_url: `https://second-hand-server-puce.vercel.app/api/v1/transactions/failed/${transactionId}`,
-      cancel_url: `https://second-hand-server-puce.vercel.app/api/v1/transactions/cancelled/${transactionId}`,
+      success_url: `https://re-cycle-mart-server.vercel.app/api/v1/transactions/success/${transactionId}`,
+      fail_url: `https://re-cycle-mart-server.vercel.app/api/v1/transactions/failed/${transactionId}`,
+      cancel_url: `https://re-cycle-mart-server.vercel.app/api/v1/transactions/cancelled/${transactionId}`,
       shipping_method: 'Courier',
       product_name: 'N/A.',
       product_category: 'N/A',
@@ -66,7 +67,7 @@ const createTransaction = async (payload: ITransaction, userEmail: string) => {
       ship_country: 'Bangladesh',
     });
 
-    console.log('Payment initiated successfully:', paymentResponse);
+    // console.log('Payment initiated successfully:', paymentResponse);
 
     const createdOrder = await Transaction.create(payload);
 
