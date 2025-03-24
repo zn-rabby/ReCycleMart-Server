@@ -9,21 +9,25 @@ const router = express.Router();
 
 router.post(
   '/',
-  auth(USER_ROLE.user),
+  auth(USER_ROLE.user, USER_ROLE.admin),
   TransactionController.createTransactionController,
 );
 
 router.get(
   '/purchases',
-  auth(USER_ROLE.user),
+  auth(USER_ROLE.user, USER_ROLE.admin),
   TransactionController.getUserPurchases,
 );
 
-router.get('/sales', auth(USER_ROLE.user), TransactionController.getUserSales);
+router.get(
+  '/sales',
+  auth(USER_ROLE.user, USER_ROLE.admin),
+  TransactionController.getUserSales,
+);
 
 router.patch(
   '/:id',
-  auth(USER_ROLE.user),
+  auth(USER_ROLE.user, USER_ROLE.admin),
   TransactionController.updateTransactionStatus,
 );
 

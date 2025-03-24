@@ -10,7 +10,7 @@ const router = express.Router();
 
 router.post(
   '/',
-  auth(USER_ROLE.user),
+  auth(USER_ROLE.user, USER_ROLE.admin),
   validateRequest(listingValidation.createListingValidationSchema),
   ListingController.createListing,
 );
@@ -26,12 +26,20 @@ router.get('/:id', ListingController.getSingleListing);
 
 router.get(
   '/my-listings',
-  auth(USER_ROLE.user),
+  auth(USER_ROLE.user, USER_ROLE.admin),
   ListingController.getOwnListings,
 );
 
-router.patch('/:id', auth(USER_ROLE.user), ListingController.updateListing);
+router.patch(
+  '/:id',
+  auth(USER_ROLE.user, USER_ROLE.admin),
+  ListingController.updateListing,
+);
 
-router.delete('/:id', auth(USER_ROLE.user), ListingController.deleteListing);
+router.delete(
+  '/:id',
+  auth(USER_ROLE.user, USER_ROLE.admin),
+  ListingController.deleteListing,
+);
 
 export const ListingRoutes = router;
