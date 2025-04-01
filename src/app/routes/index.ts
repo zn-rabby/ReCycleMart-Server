@@ -3,6 +3,7 @@ import { ListingRoutes } from '../modules/listings/listing.route';
 import { AuthRoutes } from '../modules/auth/auth.route';
 import { UserRoutes } from '../modules/user/user.route';
 import { TransactionRoutes } from '../modules/transactions/transactions.route';
+import BlogRouters from '../modules/blog/blog.route';
 const router = Router();
 
 const moduleRoutes = [
@@ -21,6 +22,10 @@ const moduleRoutes = [
   {
     path: '/transactions',
     route: TransactionRoutes,
+  },
+  {
+    path: '/blogs',
+    route: BlogRouters,
   },
 ];
 
