@@ -1,5 +1,5 @@
 import QueryBuilder from '../../builder/QueryBuilder';
-import AppError from '../../errors/AppError';
+import AppError from '../../errors/appError';
 import { blogSearchableFields } from './blog.constant';
 import { IBlog } from './blog.interface';
 import Blog from './blog.model';
