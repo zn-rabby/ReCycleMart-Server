@@ -4,8 +4,8 @@ import { Listing } from '../listings/listing.model';
 import User from '../user/user.model';
 import { Transaction } from '../transactions/transactions.nodel';
 
-export const getTotalProductsAdded = async (identifier: string) => {
-  const user = await User.isUserExists(identifier);
+export const getTotalProductsAdded = async (email: string) => {
+  const user = await User.isUserExists(email);
   if (!user) {
     throw new AppError(404, 'User not found');
   }
@@ -13,8 +13,8 @@ export const getTotalProductsAdded = async (identifier: string) => {
   return Listing.countDocuments({ userID: user._id, isDeleted: false });
 };
 
-export const getTotalPurchases = async (identifier: string) => {
-  const user = await User.isUserExists(identifier);
+export const getTotalPurchases = async (email: string) => {
+  const user = await User.isUserExists(email);
   if (!user) {
     throw new AppError(404, 'User not found');
   }
@@ -22,8 +22,8 @@ export const getTotalPurchases = async (identifier: string) => {
   return Transaction.countDocuments({ buyerID: user._id, status: 'completed' });
 };
 
-export const getTotalSales = async (identifier: string) => {
-  const user = await User.isUserExists(identifier);
+export const getTotalSales = async (email: string) => {
+  const user = await User.isUserExists(email);
   if (!user) {
     throw new AppError(404, 'User not found');
   }
@@ -46,12 +46,12 @@ export const getTotalSales = async (identifier: string) => {
   return totalSales;
 };
 
-const getSalesAnalyticsForCurrentMonth = async (identifier: string) => {
+const getSalesAnalyticsForCurrentMonth = async (email: string) => {
   // get the start and end date of the current month dynamically
   const startOfMonth = moment().startOf('month').toDate();
   const endOfMonth = moment().endOf('month').toDate();
 
-  const user = await User.isUserExists(identifier);
+  const user = await User.isUserExists(email);
 
   if (!user) throw new AppError(404, 'User not found');
 

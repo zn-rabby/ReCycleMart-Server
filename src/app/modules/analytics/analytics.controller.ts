@@ -3,9 +3,9 @@ import sendResponse from '../../utils/sendResponse';
 import { AnalyticsServices } from './analytics.service';
 
 const getTotalProductsAddedController = catchAsync(async (req, res) => {
-  const { identifier } = req.user;
+  const { email } = req.user;
   const totalProductsAdded =
-    await AnalyticsServices.getTotalProductsAdded(identifier);
+    await AnalyticsServices.getTotalProductsAdded(email);
   sendResponse(res, {
     success: true,
     message: 'Total products added retrieved successfully',
@@ -13,9 +13,10 @@ const getTotalProductsAddedController = catchAsync(async (req, res) => {
     data: totalProductsAdded,
   });
 });
+
 const getTotalPurchasesController = catchAsync(async (req, res) => {
-  const { identifier } = req.user;
-  const totalPurchases = await AnalyticsServices.getTotalPurchases(identifier);
+  const { email } = req.user;
+  const totalPurchases = await AnalyticsServices.getTotalPurchases(email);
   sendResponse(res, {
     success: true,
     message: 'Total purchases retrieved successfully',
@@ -25,8 +26,8 @@ const getTotalPurchasesController = catchAsync(async (req, res) => {
 });
 
 const getTotalSalesController = catchAsync(async (req, res) => {
-  const { identifier } = req.user;
-  const totalSales = await AnalyticsServices.getTotalSales(identifier);
+  const { email } = req.user;
+  const totalSales = await AnalyticsServices.getTotalSales(email);
   sendResponse(res, {
     success: true,
     message: 'Total sales retrieved successfully',
@@ -37,9 +38,9 @@ const getTotalSalesController = catchAsync(async (req, res) => {
 
 const getSalesAnalyticsForCurrentMonthController = catchAsync(
   async (req, res) => {
-    const { identifier } = req.user;
+    const { email } = req.user;
     const result =
-      await AnalyticsServices.getSalesAnalyticsForCurrentMonth(identifier);
+      await AnalyticsServices.getSalesAnalyticsForCurrentMonth(email);
     sendResponse(res, {
       success: true,
       message: 'Total sales in current month data retrieved successfully',
