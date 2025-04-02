@@ -1,24 +1,23 @@
 import express from 'express';
-import { NewsLetterControllers } from './newsLetter.controller';
-import { validateRequestSchema } from '../../middleware/validateRequestSchema';
-import { NewsLetterValidationSchema } from './newsLetter.validation';
+
 import auth from '../../middleware/auth';
 import { USER_ROLE } from '../user/user.constant';
+import validateRequest from '../../middleware/validateRequest';
+import { NewsLetterValidationSchema } from './newsLetter.validation';
+import { newsLetterController } from './newsLetter.controller';
 
-const router = express.Router();
+const NewsLetterRouters = express.Router();
 
-router.post(
+NewsLetterRouters.post(
   '/',
-  validateRequestSchema(
-    NewsLetterValidationSchema.createNewsLetterValidationSchema,
-  ),
-  NewsLetterControllers.createNewsLetterController,
+  validateRequest(NewsLetterValidationSchema.createNewsLetterValidationSchema),
+  newsLetterController.createNewsLetter,
 );
 
-router.get(
+NewsLetterRouters.get(
   '/',
   auth(USER_ROLE.admin),
-  NewsLetterControllers.getAllNewsLettersController,
+  newsLetterController.getAllNewsLetters,
 );
 
-export const NewsLetterRoutes = router;
+export const NewsLetterRoutes = NewsLetterRouters;

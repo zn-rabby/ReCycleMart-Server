@@ -1,11 +1,11 @@
 import catchAsync from '../../utils/catchAsync';
 import sendResponse from '../../utils/sendResponse';
-import { NewsLetterServices } from './newsLetter.service';
+import { newsLetterService } from './newsLetter.service';
 
 const createNewsLetter = catchAsync(async (req, res) => {
   const newsLetterPayload = req.body;
   const createdNewsLetter =
-    await NewsLetterServices.createNewsLetter(newsLetterPayload);
+    await newsLetterService.createNewsLetter(newsLetterPayload);
   sendResponse(res, {
     success: true,
     message: 'NewsLetter is created successfully',
@@ -15,7 +15,7 @@ const createNewsLetter = catchAsync(async (req, res) => {
 });
 
 const getAllNewsLetters = catchAsync(async (req, res) => {
-  const newsLetters = await NewsLetterServices.getAllNewsLetters();
+  const newsLetters = await newsLetterService.getAllNewsLetters();
   sendResponse(res, {
     success: true,
     message: 'NewsLetters are retrieved successfully',
