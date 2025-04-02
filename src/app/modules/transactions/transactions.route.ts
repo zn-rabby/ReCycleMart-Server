@@ -3,7 +3,7 @@ import express from 'express';
 import auth from '../../middleware/auth';
 import { USER_ROLE } from '../user/user.constant';
 import { TransactionController } from './transactions.controller';
-import { PaymentControllers } from './payment.controller';
+import { PaymentControllers } from '../payment/payment.controller';
 
 const router = express.Router();
 

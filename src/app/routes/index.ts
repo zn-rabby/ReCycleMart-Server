@@ -5,6 +5,7 @@ import { UserRoutes } from '../modules/user/user.route';
 import { TransactionRoutes } from '../modules/transactions/transactions.route';
 import BlogRouters from '../modules/blog/blog.route';
 import ContactRouters from '../modules/contact/contact.route';
+import { PaymentRoutes } from '../modules/payment/payment.route';
 const router = Router();
 
 const moduleRoutes = [
@@ -23,6 +24,10 @@ const moduleRoutes = [
   {
     path: '/transactions',
     route: TransactionRoutes,
+  },
+  {
+    path: '/transactions',
+    route: PaymentRoutes,
   },
   {
     path: '/blogs',
