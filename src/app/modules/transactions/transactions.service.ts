@@ -6,8 +6,8 @@ import User from '../user/user.model';
 import { ITransaction } from './transactions.interface';
 import { Transaction } from './transactions.nodel';
 import { generateTransactionId } from './transaction.utils';
-import { SSLCommerzService } from './sslcommerz.service';
 import QueryBuilder from '../../builder/QueryBuilder';
+import { SSLCommerzService } from '../sslcommerz/sslcommerz.service';
 
 const createTransaction = async (payload: ITransaction, userEmail: string) => {
   try {

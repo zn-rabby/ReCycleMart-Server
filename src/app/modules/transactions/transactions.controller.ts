@@ -1,4 +1,3 @@
-import { Request, Response } from 'express';
 import catchAsync from '../../utils/catchAsync';
 import sendResponse from '../../utils/sendResponse';
 import { TransactionServices } from './transactions.service';
@@ -69,21 +68,6 @@ const updateTransactionStatus = catchAsync(async (req, res) => {
     data: result,
   });
 });
-
-// const updateTransactionStatus = catchAsync(async (req, res) => {
-//   const id = req.params.id;
-//   const updatedData = req.body;
-//   // const userEmail = req?.user?.email;
-
-//   const result = await TransactionServices.updateTransaction(id, updatedData);
-
-//   sendResponse(res, {
-//     statusCode: 200,
-//     success: true,
-//     message: 'Order updated successfully',
-//     data: result,
-//   });
-// });
 
 export const TransactionController = {
   createTransactionController,

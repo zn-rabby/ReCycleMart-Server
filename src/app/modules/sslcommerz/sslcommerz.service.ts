@@ -4,7 +4,7 @@
 import SSLCommerzPayment from 'sslcommerz-lts';
 import config from '../../config';
 import AppError from '../../errors/appError';
-import { TPaymentResponse } from './transactions.interface';
+import { TPaymentResponse } from '../transactions/transactions.interface';
 
 const store_id = config.store_id;
 const store_pass = config.store_pass;
