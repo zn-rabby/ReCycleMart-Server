@@ -17,9 +17,9 @@ router.post(
 router.get('/', ListingController.getAllListing);
 
 router.get(
-    '/category/:category',
-    ListingController.getListingsByCategoryController,
-  );
+  '/category/:category',
+  ListingController.getListingsByCategoryController,
+);
 
 router.get(
   '/user',
