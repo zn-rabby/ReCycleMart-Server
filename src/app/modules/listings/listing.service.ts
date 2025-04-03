@@ -44,6 +44,14 @@ const getAllListing = async (query: Record<string, unknown>) => {
   };
 };
 
+const getListingsByCategory = async (category: string) => {
+  const listings = await Listing.find({ category });
+  if (listings.length === 0) {
+    throw new AppError(404, 'No listing record were found in the database');
+  }
+  return listings;
+};
+
 const getListingByUser = async (
   email: string,
   query: Record<string, unknown>,
@@ -126,6 +134,7 @@ export const ListingServices = {
   createListing,
   getAllListing,
   getSingleListing,
+  getListingsByCategory,
   updateListing,
   deleteListing,
   getOwnListings,

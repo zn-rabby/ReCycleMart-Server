@@ -29,6 +29,17 @@ const getAllListing = catchAsync(async (req, res) => {
   });
 });
 
+const getListingsByCategoryController = catchAsync(async (req, res) => {
+  const category = req.params.category;
+  const listings = await ListingServices.getListingsByCategory(category);
+  sendResponse(res, {
+    success: true,
+    message: 'Category wise listings are retrieved successfully',
+    statusCode: 200,
+    data: listings,
+  });
+});
+
 const getListingByUser = catchAsync(async (req, res) => {
   const { email } = req.user;
   const result = await ListingServices.getListingByUser(email, req.query);
@@ -97,6 +108,7 @@ export const ListingController = {
   createListing,
   getAllListing,
   getSingleListing,
+  getListingsByCategoryController,
   updateListing,
   deleteListing,
   getOwnListings,

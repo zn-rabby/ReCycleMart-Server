@@ -17,6 +17,11 @@ router.post(
 router.get('/', ListingController.getAllListing);
 
 router.get(
+    '/category/:category',
+    ListingController.getListingsByCategoryController,
+  );
+
+router.get(
   '/user',
   auth(USER_ROLE.user, USER_ROLE.admin),
   ListingController.getListingByUser,
