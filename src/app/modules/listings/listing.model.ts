@@ -15,36 +15,52 @@ const listingSchema = new Schema(
     images: { type: [String], required: true }, // array of image URLs
     category: {
       type: String,
-      enum: ['electronics', 'clothing', 'gadgets', 'sports'],
-      required: true,
+      enum: {
+        values: [
+          'mobiles',
+          'electronics',
+          'vehicles',
+          'property',
+          'home',
+          'pets',
+          'cloths',
+          'sports',
+        ],
+        message: '{VALUE} is not a valid category',
+      },
     },
+
     location: { type: String, required: true },
     userID: {
       type: Schema.Types.ObjectId,
       ref: 'User',
       required: true,
     },
+    status: {
+      type: String,
+      enum: ['available', 'sold'],
+      default: 'available',
+    },
     ratingCount: {
       type: Number,
       default: 0,
       min: 0,
+    },
+    contactNumber: {
+      type: String,
+      trim: true,
     },
     stock: {
       type: Number,
       required: [true, 'Product stock is required'],
       min: 0,
     },
-    status: {
+
+    brand: {
       type: String,
-      enum: ['available', 'sold', 'pending', 'hidden'],
-      default: 'available',
+      trim: true,
     },
     negotiable: { type: Boolean, default: false },
-    contactMethod: {
-      type: String,
-      enum: ['phone', 'email', 'chat'],
-      default: 'chat',
-    },
   },
   { timestamps: true },
 );

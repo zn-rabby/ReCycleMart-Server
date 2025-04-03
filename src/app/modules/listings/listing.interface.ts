@@ -7,13 +7,23 @@ export type IListing = {
   price: number;
   condition: 'new' | 'used' | 'refurbished';
   images: string[];
-  category: 'electronics' | 'clothing' | 'gadgets' | 'sports';
+  category:
+    | 'mobiles'
+    | 'electronics'
+    | 'vehicles'
+    | 'property'
+    | 'home'
+    | 'pets'
+    | 'cloths'
+    | 'sports';
   location: string;
   userID?: Types.ObjectId;
-  status: 'available' | 'sold' | 'pending' | 'hidden';
+  status: 'available' | 'sold';
   createdAt?: Date;
   updatedAt?: Date;
+  contactNumber?: string;
   negotiable?: boolean;
+  brand?: string;
   ratingCount?: number;
   stock: number;
 };
