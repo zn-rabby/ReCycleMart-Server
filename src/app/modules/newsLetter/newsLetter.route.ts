@@ -20,4 +20,10 @@ NewsLetterRouters.get(
   newsLetterController.getAllNewsLetters,
 );
 
+NewsLetterRouters.delete(
+  '/:id',
+  auth(USER_ROLE.admin, USER_ROLE.user),
+  newsLetterController.deleteNewsLetter,
+);
+
 export const NewsLetterRoutes = NewsLetterRouters;

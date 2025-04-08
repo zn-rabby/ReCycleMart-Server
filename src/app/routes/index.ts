@@ -6,6 +6,7 @@ import { TransactionRoutes } from '../modules/transactions/transactions.route';
 import BlogRouters from '../modules/blog/blog.route';
 import ContactRouters from '../modules/contact/contact.route';
 import { PaymentRoutes } from '../modules/payment/payment.route';
+import { NewsLetterRoutes } from '../modules/newsLetter/newsLetter.route';
 const router = Router();
 
 const moduleRoutes = [
@@ -36,6 +37,10 @@ const moduleRoutes = [
   {
     path: '/contacts',
     route: ContactRouters,
+  },
+  {
+    path: '/newsletters',
+    route: NewsLetterRoutes,
   },
 ];
 

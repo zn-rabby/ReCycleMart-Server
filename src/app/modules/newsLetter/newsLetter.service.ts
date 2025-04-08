@@ -15,7 +15,21 @@ const getAllNewsLetters = async () => {
   return newsLetters;
 };
 
+const deleteNewsLetters = async (id: string) => {
+  // check blog is exists
+  const newsLetter = await NewsLetter.findById(id);
+
+  if (!newsLetter) {
+    throw new AppError(404, 'newsLetter not found!');
+  }
+
+  const result = await NewsLetter.findByIdAndDelete(id, { isDeleted: true });
+
+  return result;
+};
+
 export const newsLetterService = {
   createNewsLetter,
   getAllNewsLetters,
+  deleteNewsLetters,
 };

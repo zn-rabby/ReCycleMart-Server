@@ -24,7 +24,20 @@ const getAllNewsLetters = catchAsync(async (req, res) => {
   });
 });
 
+const deleteNewsLetter = catchAsync(async (req, res) => {
+  const id = req.params.id;
+  await newsLetterService.deleteNewsLetters(id);
+
+  sendResponse(res, {
+    statusCode: 200,
+    success: true,
+    message: 'NewsLetter deleted successfully',
+    data: {},
+  });
+});
+
 export const newsLetterController = {
   createNewsLetter,
   getAllNewsLetters,
+  deleteNewsLetter,
 };
