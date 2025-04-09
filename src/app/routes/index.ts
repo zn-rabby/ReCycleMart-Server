@@ -7,6 +7,7 @@ import BlogRouters from '../modules/blog/blog.route';
 import ContactRouters from '../modules/contact/contact.route';
 import { PaymentRoutes } from '../modules/payment/payment.route';
 import { NewsLetterRoutes } from '../modules/newsLetter/newsLetter.route';
+import { AnalyticsRoutes } from '../modules/analytics/analytics.route';
 const router = Router();
 
 const moduleRoutes = [
@@ -41,6 +42,10 @@ const moduleRoutes = [
   {
     path: '/newsletters',
     route: NewsLetterRoutes,
+  },
+  {
+    path: '/analytics',
+    route: AnalyticsRoutes,
   },
 ];
 
