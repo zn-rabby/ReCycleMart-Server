@@ -10,7 +10,7 @@ export const getTotalProductsAdded = async (email: string) => {
     throw new AppError(404, 'User not found');
   }
 
-  return Listing.countDocuments({ userID: user._id, isDeleted: false });
+  return Listing.countDocuments({ userID: user._id });
 };
 
 export const getTotalPurchases = async (email: string) => {
@@ -19,7 +19,7 @@ export const getTotalPurchases = async (email: string) => {
     throw new AppError(404, 'User not found');
   }
 
-  return Transaction.countDocuments({ buyerID: user._id, status: 'completed' });
+  return Transaction.countDocuments({ buyerID: user._id });
 };
 
 export const getTotalSales = async (email: string) => {
@@ -31,7 +31,6 @@ export const getTotalSales = async (email: string) => {
   // find all transactions where the seller matches the user's ID and the status is 'completed'
   const transactions = await Transaction.find({
     sellerID: user._id,
-    status: 'completed',
   });
 
   // fetch the price of each item in the transactions
@@ -62,7 +61,6 @@ const getSalesAnalyticsForCurrentMonth = async (email: string) => {
           $gte: startOfMonth,
           $lt: endOfMonth,
         },
-        status: 'completed',
         sellerID: user._id,
       },
     },
