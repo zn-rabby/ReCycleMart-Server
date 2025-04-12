@@ -11,6 +11,17 @@ export type IUser = {
   status?: 'ban' | 'unban';
   createdAt?: Date;
   updatedAt?: Date;
+
+  // profile update related additional fields
+  profilePicture?: string;
+  city?: string;
+  address?: string;
+  postalCode?: string;
+  country?: string;
+  gender?: 'male' | 'female';
+  bio?: string;
+  facebook?: string;
+  website?: string;
 };
 
 export interface UserModel extends Model<IUser> {
