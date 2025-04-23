@@ -1,11 +1,10 @@
-import { CLIENT_RENEG_LIMIT } from 'tls';
+
 import AppError from '../../errors/appError';
-import { IJwtPayload, IUser } from './user.interface';
+import {  IUser } from './user.interface';
 import User from './user.model';
 
 const getSingleUser = async (id: string) => {
   const user = await User.findById(id);
-  console.log(id, 'id', user);
   return user;
 };
 
@@ -41,7 +40,6 @@ const deleteUser = async (id: string) => {
 const myProfile = async (email: string) => {
   // Find the user by email and exclude the password field
   const user = await User.findOne({ email }).select('-password');
-  console.log(user);
 
   if (!user) {
     throw new AppError(404, 'User not found!');
