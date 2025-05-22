@@ -8,6 +8,7 @@ import ContactRouters from '../modules/contact/contact.route';
 import { PaymentRoutes } from '../modules/payment/payment.route';
 import { NewsLetterRoutes } from '../modules/newsLetter/newsLetter.route';
 import { AnalyticsRoutes } from '../modules/analytics/analytics.route';
+import { ChatRoutes } from '../modules/chat/chat.route';
 const router = Router();
 
 const moduleRoutes = [
@@ -46,6 +47,10 @@ const moduleRoutes = [
   {
     path: '/analytics',
     route: AnalyticsRoutes,
+  },
+  {
+    path: '/chat',
+    route: ChatRoutes,
   },
 ];
 
